@@ -16,3 +16,6 @@ def wiki(request, name):
     return render(request, "encyclopedia/content.html", {
         "content": html_content
     })
+
+def newpage(request):
+    return render(request, "encyclopedia/newpage.html")
