@@ -88,6 +88,12 @@ def search(request):
     for entry in entries:
         if query.lower() in entry.lower():
             results.append(entry)
+    if not results:
+        return render(request, "encyclopedia/search.html", {
+            "query": query,
+            "results": [],
+            "error": "No result found"
+        })
     
     return render(request, "encyclopedia/search.html", {
         "query": query,
