@@ -78,3 +78,6 @@ def edit(request, name):
         "form": form,
         "title": name
     })
+
+def search(request):
+    return render(request, "encyclopedia/search.html")
