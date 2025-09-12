@@ -4,6 +4,7 @@ import markdown
 from . import util
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from random import choice
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -19,11 +20,12 @@ def wiki(request, name):
         })
     html_content = markdown.markdown(entrie)
     return render(request, "encyclopedia/content.html", {
+        "title": name,
         "content": html_content
     })
 class NewPageform(forms.Form):
-    title = forms.CharField(label="Title")
-    description = forms.CharField(label="Description")
+    title = forms.CharField(label="Title", widget=forms.TextInput(attrs={'class': 'form-control w-75 mb-2'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control w-75'}), label="Description",)
 
     
 def newpage(request):
@@ -46,3 +48,7 @@ def newpage(request):
     return render(request, "encyclopedia/newpage.html", {
         "form": NewPageform()
     })
+
+def randompage(request):
+    name = choice(util.list_entries())
+    return HttpResponseRedirect(reverse("wiki", args=[name]))
