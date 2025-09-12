@@ -52,3 +52,29 @@ def newpage(request):
 def randompage(request):
     name = choice(util.list_entries())
     return HttpResponseRedirect(reverse("wiki", args=[name]))
+
+
+def edit(request, name):
+    entry_content = util.get_entry(name)
+    if not entry_content:
+        return render(request, "encyclopedia/errorpage.html", {
+            "message": f"The page '{name}' does not exist."
+        })
+    if request.method == "POST":
+        form = NewPageform(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            description = form.cleaned_data["description"]
+            util.save_entry(title, description)
+            return HttpResponseRedirect(reverse("wiki", args=[name]))
+    else:
+        form = NewPageform(initial={
+            "title": name,
+            "description": entry_content
+                })
+
+
+    return render(request, "encyclopedia/edit.html", {
+        "form": form,
+        "title": name
+    })

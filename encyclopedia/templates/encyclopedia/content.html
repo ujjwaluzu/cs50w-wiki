@@ -7,8 +7,8 @@
 {% block body %}
 
     {{ content|safe }}
-
+    <form action="{% url 'edit' title %}" method="get">
     <input type="submit" class="btn btn-primary w-20" value="Edit Page">
-    
+    </form>
 
 {% endblock %}
