@@ -80,4 +80,16 @@ def edit(request, name):
     })
 
 def search(request):
-    return render(request, "encyclopedia/search.html")
+    query = request.GET.get("q").strip()
+    entries = util.list_entries()
+    if query.lower() in (entry.lower() for entry in entries):
+        return HttpResponseRedirect(reverse("wiki", args=[query]))
+    results = []
+    for entry in entries:
+        if query.lower() in entry.lower():
+            results.append(entry)
+    
+    return render(request, "encyclopedia/search.html", {
+        "query": query,
+        "results": results
+    })
