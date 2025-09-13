@@ -1,53 +1,55 @@
+
+
 {% load static %}
 
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
-    </head>
-    <body>
-        <div class="row">
-            <div class="sidebar col-lg-2 col-md-3">
-                <h2 class="mb-2">Wiki</h2>
-                
-                    <form method="get" action="{% url 'search'%}">
-                    <div class="input-group mb-2">
-                        <input 
-                            type="text" 
-                            name="q" 
-                            class="form-control" 
-                            placeholder="Search Encyclopedia"
-                        >
-                    <button  class="btn btn-primary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    </form>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="row no-gutters">
+        <!-- Sidebar -->
+        <div class="sidebar col-lg-2 col-md-3 text-center p-3 border-right">
+            <img src="https://en.wikipedia.org/static/images/icons/wikipedia.png" alt="Wiki Logo" class="img-fluid mb-2">
+            <h2 class="mb-3 wiki" style="font-family: Hoefler Text, Linux Libertine,  Georgia, Times New Roman, Times, serif;">Wiki</h2>
+
+            <!-- Search Form -->
+            <form method="get" action="{% url 'search' %}">
+                <div class="input-group mb-3">
+                    <input 
+                        type="text" 
+                        name="q" 
+                        class="form-control" 
+                        placeholder="Search Encyclopedia"
+                    >
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Sidebar Links -->
+            <div class="nav flex-column text-left">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                <a class="nav-link" href="{% url 'newpage' %}">Create New Page</a>
+                <a class="nav-link" href="{% url 'randompage' %}">Random Page</a>
             </div>
 
-
-                    <!-- <input class="search mb-2 form-control" type="text" name="q" placeholder="Search Encyclopedia"> -->
-                </form> 
-                <div>
-                    <a class="mb-2" href="{% url 'index' %}">Home</a>
-                </div>
-                <div>
-                    <a class="mb-2" href="{% url 'newpage' %}">Create New Page</a>
-                </div>
-                <div>
-                    <a href="{% url 'randompage' %}">Random Page</a>
-                </div>
-                {% block nav %}
-                {% endblock %}
-            </div>
-            <div class="main col-lg-10 col-md-9">
-                {% block body %}
-                {% endblock %}
-            </div>
+            {% block nav %}
+            {% endblock %}
         </div>
 
-    </body>
+        <!-- Main Content -->
+        <div class="main col-lg-10 col-md-9 p-4">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
 </html>
