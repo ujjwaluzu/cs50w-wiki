@@ -115,7 +115,7 @@ The primary goals of this project are to:
 ## Markdown to HTML Conversion
 - On each entry page:
   - Convert Markdown content to HTML before displaying it.
-- You may use the `markdown2` Python package for conversion.
+- You may use the `markdown` Python package for conversion.
 - Install using:
   ```bash
-  pip3 install markdown2
+  pip3 install markdown
