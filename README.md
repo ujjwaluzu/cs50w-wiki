@@ -2,6 +2,7 @@
 
 ## 📘 Project Description
 [screencast](https://youtu.be/hnYdDZRMS50?si=FAiwGwBMiWvpxc_5)
+---
 Wiki is a web-based encyclopedia application built as part of **CS50’s Web Programming with Python and JavaScript (CS50W)**. The project allows users to view, search, create, edit, and explore encyclopedia entries written in **Markdown**, which are dynamically converted into **HTML** for display.
 
 The application is designed to mimic the core functionality of Wikipedia while focusing on server-side logic using **Django**, template rendering, and user interaction through forms and URL routing.
